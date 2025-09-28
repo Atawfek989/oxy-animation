@@ -27,7 +27,60 @@ class Oxy_Animation_Effects_Registry {
         $this->register_all_effects();
     }
 
+    private function get_standard_attributes() {
+        return array(
+            'data-oxy-anim-duration' => array(
+                'label' => 'Duration',
+                'type' => 'select',
+                'options' => array(
+                    '1s' => 'Normal (1s)',
+                    '0.5s' => 'Faster (0.5s)',
+                    '0.8s' => 'Fast (0.8s)',
+                    '2s' => 'Slow (2s)',
+                    '3s' => 'Slower (3s)'
+                ),
+                'default' => '1s'
+            ),
+            'data-oxy-anim-delay' => array(
+                'label' => 'Delay',
+                'type' => 'select',
+                'options' => array(
+                    '0s' => 'No Delay',
+                    '0.5s' => '0.5 seconds',
+                    '1s' => '1 second',
+                    '2s' => '2 seconds',
+                    '3s' => '3 seconds'
+                ),
+                'default' => '0s'
+            ),
+            'data-oxy-anim-repeat' => array(
+                'label' => 'Repeat',
+                'type' => 'select',
+                'options' => array(
+                    '1' => 'Once',
+                    '2' => 'Twice',
+                    '3' => '3 times',
+                    'infinite' => 'Infinite'
+                ),
+                'default' => '1'
+            ),
+            'data-oxy-anim-trigger' => array(
+                'label' => 'Trigger',
+                'type' => 'select',
+                'options' => array(
+                    'scroll' => 'On Scroll',
+                    'hover' => 'On Hover',
+                    'click' => 'On Click',
+                    'load' => 'On Page Load'
+                ),
+                'default' => 'scroll'
+            )
+        );
+    }
+
     private function register_all_effects() {
+        $standard_attributes = $this->get_standard_attributes();
+
         // GENERAL EFFECTS - All Animate.css animations in one tab
         $this->effects['general'] = array(
             'name' => 'General Effects',
@@ -39,25 +92,29 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Bounce',
                     'class' => 'oxy-ani-bounce',
                     'preview' => 'Element bounces up and down',
-                    'tags' => array('attention seekers', 'fun', 'playful')
+                    'tags' => array('attention seekers', 'fun', 'playful'),
+                    'attributes' => $standard_attributes
                 ),
                 'flash' => array(
                     'name' => 'Flash',
                     'class' => 'oxy-ani-flash',
                     'preview' => 'Element flashes in and out',
-                    'tags' => array('attention seekers', 'emphasis', 'alert')
+                    'tags' => array('attention seekers', 'emphasis', 'alert'),
+                    'attributes' => $standard_attributes
                 ),
                 'pulse' => array(
                     'name' => 'Pulse',
                     'class' => 'oxy-ani-pulse',
                     'preview' => 'Element pulses with scale effect',
-                    'tags' => array('attention seekers', 'heartbeat', 'emphasis')
+                    'tags' => array('attention seekers', 'heartbeat', 'emphasis'),
+                    'attributes' => $standard_attributes
                 ),
                 'rubber-band' => array(
                     'name' => 'Rubber Band',
                     'class' => 'oxy-ani-rubberBand',
                     'preview' => 'Element stretches like rubber band',
-                    'tags' => array('attention seekers', 'elastic', 'fun')
+                    'tags' => array('attention seekers', 'elastic', 'fun'),
+                    'attributes' => $standard_attributes
                 ),
                 'shake-x' => array(
                     'name' => 'Shake X',
@@ -165,7 +222,8 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Bounce In',
                     'class' => 'oxy-ani-bounceIn',
                     'preview' => 'Element bounces into view',
-                    'tags' => array('bouncing entrances', 'playful', 'elastic')
+                    'tags' => array('bouncing entrances', 'playful', 'elastic'),
+                    'attributes' => $standard_attributes
                 ),
                 'bounce-in-down' => array(
                     'name' => 'Bounce In Down',
@@ -229,13 +287,15 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Fade In',
                     'class' => 'oxy-ani-fadeIn',
                     'preview' => 'Element fades in smoothly',
-                    'tags' => array('fading entrances', 'basic', 'smooth')
+                    'tags' => array('fading entrances', 'basic', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'fade-in-down' => array(
                     'name' => 'Fade In Down',
                     'class' => 'oxy-ani-fadeInDown',
                     'preview' => 'Element fades in from top',
-                    'tags' => array('fading entrances', 'directional', 'smooth')
+                    'tags' => array('fading entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'fade-in-down-big' => array(
                     'name' => 'Fade In Down Big',
@@ -247,7 +307,8 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Fade In Left',
                     'class' => 'oxy-ani-fadeInLeft',
                     'preview' => 'Element fades in from left',
-                    'tags' => array('fading entrances', 'directional', 'smooth')
+                    'tags' => array('fading entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'fade-in-left-big' => array(
                     'name' => 'Fade In Left Big',
@@ -259,7 +320,8 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Fade In Right',
                     'class' => 'oxy-ani-fadeInRight',
                     'preview' => 'Element fades in from right',
-                    'tags' => array('fading entrances', 'directional', 'smooth')
+                    'tags' => array('fading entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'fade-in-right-big' => array(
                     'name' => 'Fade In Right Big',
@@ -271,7 +333,8 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Fade In Up',
                     'class' => 'oxy-ani-fadeInUp',
                     'preview' => 'Element fades in from bottom',
-                    'tags' => array('fading entrances', 'directional', 'smooth')
+                    'tags' => array('fading entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'fade-in-up-big' => array(
                     'name' => 'Fade In Up Big',
@@ -513,7 +576,8 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Zoom In',
                     'class' => 'oxy-ani-zoomIn',
                     'preview' => 'Element zooms into view',
-                    'tags' => array('zooming entrances', 'scale', 'growth')
+                    'tags' => array('zooming entrances', 'scale', 'growth'),
+                    'attributes' => $standard_attributes
                 ),
                 'zoom-in-down' => array(
                     'name' => 'Zoom In Down',
@@ -583,19 +647,22 @@ class Oxy_Animation_Effects_Registry {
                     'name' => 'Slide In Left',
                     'class' => 'oxy-ani-slideInLeft',
                     'preview' => 'Element slides in from left',
-                    'tags' => array('sliding entrances', 'directional', 'smooth')
+                    'tags' => array('sliding entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'slide-in-right' => array(
                     'name' => 'Slide In Right',
                     'class' => 'oxy-ani-slideInRight',
                     'preview' => 'Element slides in from right',
-                    'tags' => array('sliding entrances', 'directional', 'smooth')
+                    'tags' => array('sliding entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
                 'slide-in-up' => array(
                     'name' => 'Slide In Up',
                     'class' => 'oxy-ani-slideInUp',
                     'preview' => 'Element slides in from bottom',
-                    'tags' => array('sliding entrances', 'directional', 'smooth')
+                    'tags' => array('sliding entrances', 'directional', 'smooth'),
+                    'attributes' => $standard_attributes
                 ),
 
                 // Sliding Exits

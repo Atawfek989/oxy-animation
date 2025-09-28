@@ -1,0 +1,365 @@
+/*!
+ * Oxy Animation - Effects Modal CSS
+ * Modal and popup styles for the effects showcase
+ * Version: 2.1.0
+ */
+
+/* Modal Styles */
+.oxy-anim-modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.oxy-anim-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+}
+
+.oxy-anim-modal .modal-content {
+    background: var(--oxy-anim-bg-white);
+    margin: 40px auto;
+    width: 90%;
+    max-width: 700px;
+    border-radius: var(--oxy-anim-radius-lg);
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--oxy-anim-shadow-lg);
+    animation: oxyAnimModalSlideIn 0.3s ease-out;
+}
+
+@keyframes oxyAnimModalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.oxy-anim-modal .modal-header {
+    background: var(--oxy-anim-gradient-primary);
+    color: var(--oxy-anim-bg-white);
+    padding: 25px var(--oxy-anim-space-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.oxy-anim-modal .modal-title-section h2 {
+    margin: 0;
+    font-size: var(--oxy-anim-text-2xl);
+    font-weight: 600;
+}
+
+.oxy-anim-modal .modal-title-section p {
+    margin: 5px 0 0 0;
+    opacity: 0.9;
+    font-size: var(--oxy-anim-text-base);
+}
+
+.oxy-anim-modal .modal-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: var(--oxy-anim-bg-white);
+    font-size: var(--oxy-anim-text-2xl);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--oxy-anim-transition-fast);
+}
+
+.oxy-anim-modal .modal-close:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.oxy-anim-modal .modal-body {
+    overflow-y: auto;
+    max-height: calc(85vh - 100px);
+}
+
+.oxy-anim-modal .code-tabs-wrapper {
+    background: var(--oxy-anim-gradient-light);
+    border-bottom: 1px solid var(--oxy-anim-border-primary);
+    padding: var(--oxy-anim-space-lg) var(--oxy-anim-space-xl) 0;
+}
+
+.oxy-anim-modal .code-tabs {
+    display: flex;
+    gap: var(--oxy-anim-space-sm);
+    overflow-x: auto;
+}
+
+.oxy-anim-modal .code-tab {
+    padding: 12px var(--oxy-anim-space-lg);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--oxy-anim-border-primary);
+    border-bottom: none;
+    border-radius: var(--oxy-anim-radius-md) var(--oxy-anim-radius-md) 0 0;
+    cursor: pointer;
+    transition: var(--oxy-anim-transition);
+    display: flex;
+    align-items: center;
+    gap: var(--oxy-anim-space-sm);
+    font-size: var(--oxy-anim-text-base);
+    font-weight: 500;
+    color: var(--oxy-anim-primary);
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+}
+
+.oxy-anim-modal .code-tab:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: var(--oxy-anim-shadow-primary);
+}
+
+.oxy-anim-modal .code-tab.active {
+    background: var(--oxy-anim-bg-white);
+    color: var(--oxy-anim-primary);
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 -2px 12px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.oxy-anim-modal .code-tab .dashicons {
+    font-size: var(--oxy-anim-text-lg);
+}
+
+.oxy-anim-modal .code-panel {
+    display: none;
+    padding: var(--oxy-anim-space-xl);
+}
+
+.oxy-anim-modal .code-panel.active {
+    display: block;
+}
+
+.oxy-anim-modal .code-main-section {
+    max-width: 100%;
+}
+
+.oxy-anim-modal .code-preview {
+    background: var(--oxy-anim-bg-light);
+    border: 1px solid var(--oxy-anim-border-light);
+    border-radius: var(--oxy-anim-radius-md);
+    margin-bottom: var(--oxy-anim-space-xl);
+}
+
+.oxy-anim-modal .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--oxy-anim-space-lg);
+    border-bottom: 1px solid var(--oxy-anim-border-light);
+    background: var(--oxy-anim-bg-white);
+    border-radius: var(--oxy-anim-radius-md) var(--oxy-anim-radius-md) 0 0;
+}
+
+.oxy-anim-modal .code-header h4 {
+    margin: 0;
+    font-size: var(--oxy-anim-text-lg);
+    font-weight: 600;
+    color: var(--oxy-anim-text-primary);
+}
+
+.oxy-anim-modal .code-box {
+    padding: var(--oxy-anim-space-lg);
+    background: var(--oxy-anim-bg-dark);
+    color: #e2e8f0;
+    border-radius: 0 0 var(--oxy-anim-radius-md) var(--oxy-anim-radius-md);
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.oxy-anim-modal .code-box code {
+    font-size: var(--oxy-anim-text-lg);
+    font-weight: 500;
+    background: none;
+    padding: 0;
+    color: #68d391;
+}
+
+.oxy-anim-modal .usage-guide h4 {
+    margin: 0 0 var(--oxy-anim-space-md) 0;
+    font-size: var(--oxy-anim-text-lg);
+    font-weight: 600;
+    color: var(--oxy-anim-text-primary);
+}
+
+.oxy-anim-modal .simple-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--oxy-anim-space-sm);
+}
+
+.oxy-anim-modal .simple-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: var(--oxy-anim-space-sm) 0;
+}
+
+.oxy-anim-modal .step-number {
+    background: var(--oxy-anim-primary);
+    color: var(--oxy-anim-bg-white);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--oxy-anim-text-sm);
+    flex-shrink: 0;
+}
+
+.oxy-anim-modal .step-text {
+    font-size: var(--oxy-anim-text-base);
+    color: var(--oxy-anim-text-secondary);
+    font-weight: 500;
+}
+
+.oxy-anim-modal .copy-btn {
+    background: var(--oxy-anim-primary);
+    border: none;
+    color: var(--oxy-anim-bg-white);
+    padding: var(--oxy-anim-space-sm) var(--oxy-anim-space-md);
+    border-radius: var(--oxy-anim-radius-sm);
+    cursor: pointer;
+    font-size: var(--oxy-anim-text-sm);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--oxy-anim-transition-fast);
+}
+
+.oxy-anim-modal .copy-btn:hover {
+    background: var(--oxy-anim-primary-dark);
+    transform: translateY(-1px);
+}
+
+.oxy-anim-modal .copy-btn.copied {
+    background: #28a745;
+}
+
+/* Settings Tab Styles */
+.oxy-anim-modal .settings-main-section {
+    max-width: 100%;
+    padding: var(--oxy-anim-space-md);
+}
+
+.oxy-anim-modal .attribute-controls {
+    background: var(--oxy-anim-bg-light);
+    border: 1px solid var(--oxy-anim-border-light);
+    border-radius: var(--oxy-anim-radius-md);
+    padding: var(--oxy-anim-space-md);
+    margin-bottom: var(--oxy-anim-space-md);
+}
+
+.oxy-anim-modal .attribute-controls h4 {
+    margin: 0 0 var(--oxy-anim-space-md) 0;
+    font-size: var(--oxy-anim-text-lg);
+    font-weight: 600;
+    color: var(--oxy-anim-text-primary);
+    border-bottom: 1px solid var(--oxy-anim-border-light);
+    padding-bottom: var(--oxy-anim-space-sm);
+}
+
+.oxy-anim-modal .animation-settings-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--oxy-anim-space-md);
+}
+
+.oxy-anim-modal .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--oxy-anim-space-sm);
+}
+
+.oxy-anim-modal .control-group label {
+    font-weight: 600;
+    font-size: var(--oxy-anim-text-base);
+    color: var(--oxy-anim-text-secondary);
+    margin: 0;
+}
+
+.oxy-anim-modal .control-group select {
+    padding: var(--oxy-anim-space-sm) var(--oxy-anim-space-md);
+    border: 1px solid var(--oxy-anim-border-light);
+    border-radius: var(--oxy-anim-radius-sm);
+    font-size: var(--oxy-anim-text-base);
+    background: var(--oxy-anim-bg-white);
+    color: var(--oxy-anim-text-primary);
+    cursor: pointer;
+    transition: var(--oxy-anim-transition-fast);
+}
+
+.oxy-anim-modal .control-group select:focus {
+    outline: none;
+    border-color: var(--oxy-anim-primary);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.oxy-anim-modal .control-group select:hover {
+    border-color: var(--oxy-anim-primary);
+}
+
+.oxy-anim-modal .generated-code-preview {
+    background: var(--oxy-anim-bg-white);
+    border: 1px solid var(--oxy-anim-border-light);
+    border-radius: var(--oxy-anim-radius-md);
+    overflow: hidden;
+}
+
+.oxy-anim-modal .generated-code-preview .code-header {
+    background: var(--oxy-anim-gradient-light);
+    border-bottom: 1px solid var(--oxy-anim-border-primary);
+}
+
+.oxy-anim-modal .generated-code-preview .code-box {
+    background: var(--oxy-anim-bg-dark);
+    color: #e2e8f0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: var(--oxy-anim-text-base);
+    line-height: 1.6;
+    min-height: 80px;
+    white-space: pre-line;
+}
+
+.oxy-anim-modal .generated-code-preview .code-box code {
+    color: #68d391;
+    background: none;
+    padding: 0;
+    font-weight: 500;
+}
+
+/* Settings Tab Mobile Responsive */
+@media (max-width: 768px) {
+    .oxy-anim-modal .animation-settings-form {
+        grid-template-columns: 1fr;
+        gap: var(--oxy-anim-space-sm);
+    }
+
+    .oxy-anim-modal .settings-main-section {
+        padding: var(--oxy-anim-space-sm);
+    }
+}

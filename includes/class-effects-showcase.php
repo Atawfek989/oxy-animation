@@ -18,55 +18,81 @@ class Oxy_Animation_Effects_Showcase {
         $effects = $registry->get_all_effects();
         ?>
         <div class="wrap oxy-anim-showcase">
-            <div class="showcase-header">
-                <h1><span class="dashicons dashicons-video-alt3"></span>Animation Effects Library</h1>
-                <p class="showcase-description">Complete collection of CSS animations from Animate.css library - all optimized for text, images, and sections</p>
-
-                <!-- Stats Bar -->
-                <div class="effects-stats">
-                    <div class="stat-item">
-                        <span class="stat-number"><?php echo count($effects['general']['effects']); ?></span>
-                        <span class="stat-label">Total Effects</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">12</span>
-                        <span class="stat-label">Categories</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">CSS Based</span>
-                    </div>
-                </div>
+            <!-- Simplified Header -->
+            <div class="showcase-header-simple">
+                <h1>Animation Effects Library</h1>
+                <p>Simple animation effects for Oxygen Builder</p>
             </div>
 
-            <!-- Enhanced Search & Filter Bar -->
-            <div class="effects-controls">
-                <div class="search-section">
-                    <div class="search-input-wrapper">
-                        <span class="dashicons dashicons-search search-icon"></span>
-                        <input type="text" id="effects-search" placeholder="Search effects by name or tag (e.g., 'bounce', 'fade', 'attention'...)">
-                        <button id="clear-search" class="clear-btn">&times;</button>
+            <div class="showcase-layout">
+                <!-- Sidebar -->
+                <div class="effects-sidebar">
+                    <div class="sidebar-search">
+                        <input type="text" id="effects-search" placeholder="Search animations...">
+                        <span class="dashicons dashicons-search"></span>
+                    </div>
+
+                    <div class="sidebar-filters">
+                        <h3>Animation Types</h3>
+                        <ul class="filter-list">
+                            <li class="filter-item active" data-tag="all">
+                                <span class="dashicons dashicons-grid-view"></span>
+                                All Animations
+                                <span class="count"><?php echo count($effects['general']['effects']); ?></span>
+                            </li>
+                            <li class="filter-section">
+                                <div class="section-header" data-toggle="collapse">
+                                    <span class="dashicons dashicons-arrow-down-alt2 toggle-icon"></span>
+                                    <span class="dashicons dashicons-video-alt3"></span>
+                                    Simple Animation
+                                </div>
+                                <ul class="sub-filters" style="display: block;">
+                                    <li class="filter-item" data-tag="attention seekers">
+                                        <span class="dashicons dashicons-star-filled"></span>
+                                        Attention
+                                    </li>
+                                    <li class="filter-item" data-tag="fading entrances">
+                                        <span class="dashicons dashicons-images-alt2"></span>
+                                        Fading
+                                    </li>
+                                    <li class="filter-item" data-tag="bouncing entrances">
+                                        <span class="dashicons dashicons-format-status"></span>
+                                        Bouncing
+                                    </li>
+                                    <li class="filter-item" data-tag="zooming entrances">
+                                        <span class="dashicons dashicons-search"></span>
+                                        Zooming
+                                    </li>
+                                    <li class="filter-item" data-tag="sliding entrances">
+                                        <span class="dashicons dashicons-slides"></span>
+                                        Sliding
+                                    </li>
+                                    <li class="filter-item" data-tag="rotating entrances">
+                                        <span class="dashicons dashicons-image-rotate"></span>
+                                        Rotating
+                                    </li>
+                                    <li class="filter-item" data-tag="flippers">
+                                        <span class="dashicons dashicons-image-flip-horizontal"></span>
+                                        Flippers
+                                    </li>
+                                    <li class="filter-item" data-tag="lightspeed">
+                                        <span class="dashicons dashicons-superhero-alt"></span>
+                                        Lightspeed
+                                    </li>
+                                    <li class="filter-item" data-tag="specials">
+                                        <span class="dashicons dashicons-awards"></span>
+                                        Specials
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Tag Filters -->
-                <div class="tag-filters">
-                    <label>Filter by type:</label>
-                    <button class="tag-btn active" data-tag="all">All Effects</button>
-                    <button class="tag-btn" data-tag="attention seekers">Attention</button>
-                    <button class="tag-btn" data-tag="fading entrances">Fade</button>
-                    <button class="tag-btn" data-tag="bouncing entrances">Bounce</button>
-                    <button class="tag-btn" data-tag="zooming entrances">Zoom</button>
-                    <button class="tag-btn" data-tag="sliding entrances">Slide</button>
-                    <button class="tag-btn" data-tag="rotating entrances">Rotate</button>
-                    <button class="tag-btn" data-tag="flippers">Flip</button>
-                    <button class="tag-btn" data-tag="lightspeed">Speed</button>
-                    <button class="tag-btn" data-tag="specials">Special</button>
-                </div>
-            </div>
-
-            <!-- Effects Grid -->
-            <div class="effects-grid">
+                <!-- Main Content Area -->
+                <div class="effects-main-content">
+                    <!-- Effects Grid -->
+                    <div class="effects-grid">
                 <?php
                 $general = $effects['general'];
                 $count = 0;
@@ -93,8 +119,8 @@ class Oxy_Animation_Effects_Showcase {
                                  data-name="<?php echo esc_attr(strtolower($effect['name'])); ?>">
 
                                 <div class="effect-preview">
-                                    <div class="preview-element <?php echo esc_attr($effect['class']); ?>" data-preview-text="<?php echo esc_attr($effect['name']); ?>">
-                                        <span class="preview-text"><?php echo esc_html($effect['name']); ?></span>
+                                    <div class="preview-element" data-preview-text="<?php echo esc_attr($effect['class']); ?>">
+                                        <span class="preview-text"><?php echo esc_html($effect['class']); ?></span>
                                     </div>
                                     <div class="preview-overlay">
                                         <button class="preview-btn" data-class="<?php echo esc_attr($effect['class']); ?>">
@@ -144,51 +170,105 @@ class Oxy_Animation_Effects_Showcase {
                     </div>
                 </div>
             </div>
+                </div><!-- .effects-main-content -->
+            </div><!-- .showcase-layout -->
 
-            <!-- Code Modal (Using working Animation Preview structure) -->
+            <!-- Code Modal -->
             <div id="code-modal" class="oxy-anim-modal" style="display: none;">
+                <div class="modal-overlay"></div>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 id="modal-title"><?php _e('Effect Code', 'oxy-animation-pro'); ?></h3>
-                        <button class="modal-close">&times;</button>
+                        <div class="modal-title-section">
+                            <h2 id="modal-title">Animation Code</h2>
+                            <p id="modal-subtitle">Copy the code for your animation</p>
+                        </div>
+                        <button class="modal-close" title="Close">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <div class="code-tabs">
-                            <button class="code-tab active" data-lang="oxygen">Oxygen Builder</button>
-                            <button class="code-tab" data-lang="shortcode">Shortcode</button>
-                            <button class="code-tab" data-lang="css">CSS</button>
-                            <button class="code-tab" data-lang="html">HTML</button>
-                            <button class="code-tab" data-lang="js">JavaScript</button>
+                        <div class="code-tabs-wrapper">
+                            <div class="code-tabs">
+                                <button class="code-tab active" data-lang="settings">
+                                    <span class="dashicons dashicons-admin-generic"></span>
+                                    Settings
+                                </button>
+                                <button class="code-tab" data-lang="oxygen">
+                                    <span class="dashicons dashicons-admin-customizer"></span>
+                                    Oxygen Builder
+                                </button>
+                                <button class="code-tab" data-lang="css" style="display: none;">
+                                    <span class="dashicons dashicons-media-code"></span>
+                                    CSS
+                                </button>
+                                <button class="code-tab" data-lang="html" style="display: none;">
+                                    <span class="dashicons dashicons-editor-code"></span>
+                                    HTML
+                                </button>
+                                <button class="code-tab" data-lang="shortcode" style="display: none;">
+                                    <span class="dashicons dashicons-shortcode"></span>
+                                    Shortcode
+                                </button>
+                                <button class="code-tab" data-lang="js" style="display: none;">
+                                    <span class="dashicons dashicons-media-code"></span>
+                                    JavaScript
+                                </button>
+                            </div>
                         </div>
                         <div class="code-content">
+                            <!-- Settings Tab -->
+                            <div id="modal-settings-content" class="code-panel active">
+                                <div class="settings-main-section">
+                                    <div id="attribute-controls-container">
+                                        <!-- Attribute controls will be loaded here via AJAX -->
+                                    </div>
+
+                                    <div class="generated-code-preview">
+                                        <div class="code-header">
+                                            <h4>Generated CSS Class with Attributes</h4>
+                                            <button class="copy-btn" data-target="generated-css-output" title="Copy generated class">
+                                                <span class="dashicons dashicons-admin-page"></span>
+                                                Copy
+                                            </button>
+                                        </div>
+                                        <div class="code-box">
+                                            <code id="generated-css-output"></code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Oxygen Builder Tab -->
-                            <div id="modal-oxygen-content" class="code-block active">
-                                <h3>CSS Class</h3>
-                                <div class="code-section">
-                                    <code id="modal-oxygen-class" class="css-class-display"></code>
-                                    <button class="copy-btn" data-target="modal-oxygen-class">Copy</button>
-                                </div>
+                            <div id="modal-oxygen-content" class="code-panel">
+                                <div class="code-main-section">
+                                    <div class="code-preview">
+                                        <div class="code-header">
+                                            <h4>CSS Class to Add</h4>
+                                            <button class="copy-btn" data-target="modal-oxygen-class" title="Copy class name">
+                                                <span class="dashicons dashicons-admin-page"></span>
+                                                Copy
+                                            </button>
+                                        </div>
+                                        <div class="code-box">
+                                            <code id="modal-oxygen-class" class="css-class-display"></code>
+                                        </div>
+                                    </div>
 
-                                <h3>Custom Attributes</h3>
-                                <div class="code-section">
-                                    <pre id="modal-oxygen-attributes" class="attributes-display"></pre>
-                                    <button class="copy-btn" data-target="modal-oxygen-attributes">Copy</button>
-                                </div>
-
-                                <h3>How to Use in Oxygen Builder</h3>
-                                <div class="usage-instructions">
-                                    <ol>
-                                        <li>Select your element in Oxygen Builder</li>
-                                        <li>Go to <strong>Advanced → CSS Classes</strong></li>
-                                        <li>Add the CSS class shown above</li>
-                                        <li>If attributes are needed, go to <strong>Advanced → Attributes</strong></li>
-                                        <li>Click the <strong>+ Add Attribute</strong> button for each attribute</li>
-                                        <li>Enter the attribute name (e.g., <code>data-duration</code>) in the <strong>Name</strong> field</li>
-                                        <li>Enter the attribute value (e.g., <code>1</code>) in the <strong>Value</strong> field</li>
-                                        <li>Repeat for each attribute shown above</li>
-                                        <li>Save and preview your page</li>
-                                    </ol>
-                                    <p class="note"><strong>Note:</strong> Add attributes one by one. Don't copy the entire attribute string.</p>
+                                    <div class="usage-guide">
+                                        <h4>How to Use</h4>
+                                        <div class="simple-steps">
+                                            <div class="simple-step">
+                                                <span class="step-number">1</span>
+                                                <span class="step-text">Select element in Oxygen</span>
+                                            </div>
+                                            <div class="simple-step">
+                                                <span class="step-number">2</span>
+                                                <span class="step-text">Add CSS class above</span>
+                                            </div>
+                                            <div class="simple-step">
+                                                <span class="step-number">3</span>
+                                                <span class="step-text">Save & preview</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -254,550 +334,294 @@ class Oxy_Animation_Effects_Showcase {
             </div>
         </div>
 
-        <style>
-        .oxy-anim-showcase {
-            max-width: 1400px;
-            margin: 20px auto;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        /* Header Styles */
-        .showcase-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .showcase-header h1 {
-            margin: 0 0 15px 0;
-            font-size: 2.5em;
-            font-weight: 300;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .showcase-header .dashicons {
-            font-size: 40px;
-        }
-
-        .showcase-description {
-            font-size: 1.2em;
-            margin: 0 0 30px 0;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Stats Bar */
-        .effects-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Controls */
-        .effects-controls {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-        }
-
-        .search-section {
-            margin-bottom: 20px;
-        }
-
-        .search-input-wrapper {
-            position: relative;
-            max-width: 600px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            font-size: 18px;
-        }
-
-        .effects-controls input {
-            width: 100%;
-            padding: 15px 20px 15px 45px;
-            border: 2px solid #e1e5e9;
-            border-radius: 25px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-
-        .effects-controls input:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .clear-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #999;
-            cursor: pointer;
-            display: none;
-        }
-
-        .clear-btn.active {
-            display: block;
-        }
-
-        /* Tag Filters */
-        .tag-filters {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tag-filters label {
-            font-weight: 600;
-            color: #555;
-            margin-right: 10px;
-        }
-
-        .tag-btn {
-            padding: 8px 16px;
-            background: #f1f3f4;
-            border: 2px solid transparent;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .tag-btn:hover {
-            background: #e8eaed;
-            transform: translateY(-1px);
-        }
-
-        .tag-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        /* Category Header */
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .category-title {
-            font-size: 1.8em;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #2c3e50;
-        }
-
-        .category-title .dashicons {
-            color: #667eea;
-            font-size: 32px;
-        }
-
-        .effects-count {
-            text-align: right;
-        }
-
-        .count-number {
-            display: block;
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .count-label {
-            font-size: 0.85em;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Effects Grid */
-        .effects-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        .effect-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .effect-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-        }
-
-        .effect-card.hidden {
-            display: none;
-        }
-
-        /* Preview */
-        .effect-preview {
-            height: 180px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preview-element {
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 15px 25px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
-        }
-
-        .preview-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .effect-card:hover .preview-overlay {
-            opacity: 1;
-        }
-
-        .preview-btn {
-            background: rgba(255,255,255,0.9);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            color: #333;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .preview-btn:hover {
-            background: white;
-            transform: scale(1.05);
-        }
-
-        /* Effect Info */
-        .effect-info {
-            padding: 20px;
-        }
-
-        .effect-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .effect-title {
-            margin: 0;
-            font-size: 1.3em;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .effect-number {
-            background: #f1f3f4;
-            color: #666;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: 600;
-        }
-
-        .effect-description {
-            margin: 0 0 15px 0;
-            color: #555;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        /* Tags */
-        .effect-tags {
-            margin-bottom: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .tag-badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: lowercase;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tag-badge:hover {
-            transform: scale(1.05);
-            opacity: 0.8;
-        }
-
-        /* Actions */
-        .effect-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .effect-actions .button {
-            padding: 8px 12px;
-            height: auto;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .effect-actions .button-primary {
-            background: #667eea;
-            border-color: #667eea;
-            flex: 1;
-        }
-
-        .effect-actions .button-primary:hover {
-            background: #5a67d8;
-            border-color: #5a67d8;
-            transform: translateY(-1px);
-        }
-
-        .effect-actions .button:not(.button-primary) {
-            background: #f8f9fa;
-            color: #555;
-            border-color: #e1e5e9;
-            min-width: 40px;
-            justify-content: center;
-        }
-
-        .effect-actions .button:not(.button-primary):hover {
-            background: #e9ecef;
-            transform: translateY(-1px);
-        }
-
-        /* Modal Styles */
-        .oxy-modal {
-            display: none;
-            position: fixed;
-            z-index: 100000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-        }
-
-        .oxy-modal.active {
-            display: block;
-        }
-
-        .modal-content {
-            background: white;
-            margin: 50px auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 8px;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .modal-close:hover {
-            color: #333;
-        }
-
-        .code-tabs {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .code-tab {
-            padding: 10px 20px;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .code-tab:hover {
-            background: #f5f5f5;
-        }
-
-        .code-tab.active {
-            border-bottom-color: #007cba;
-            color: #007cba;
-            font-weight: bold;
-        }
-
-        .code-panel {
-            display: none;
-        }
-
-        .code-panel.active {
-            display: block;
-        }
-
-        .code-block {
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 10px 0;
-            position: relative;
-        }
-
-        .code-block code,
-        .code-block pre {
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            background: #007cba;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .copy-btn:hover {
-            background: #005a8a;
-        }
-
-        .copy-btn.copied {
-            background: #28a745;
-        }
-
-        .usage-steps {
-            background: #f9f9f9;
-            border-left: 4px solid #007cba;
-            padding: 15px 15px 15px 30px;
-            margin: 20px 0;
-        }
-
-        .usage-steps li {
-            margin: 8px 0;
-        }
-
-        /* Settings Form */
-        .settings-field {
-            margin-bottom: 15px;
-        }
-
-        .settings-field label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .settings-field input,
-        .settings-field select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .modal-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-        </style>
+
+        <script>
+        jQuery(document).ready(function($) {
+            // Toggle Simple Animation section
+            $('.section-header[data-toggle="collapse"]').on('click', function() {
+                const $header = $(this);
+                const $subFilters = $header.next('.sub-filters');
+
+                // Toggle collapsed state
+                $header.toggleClass('collapsed');
+                $subFilters.toggleClass('collapsed');
+
+                // Animate the toggle
+                if ($subFilters.hasClass('collapsed')) {
+                    $subFilters.slideUp(300);
+                } else {
+                    $subFilters.slideDown(300);
+                }
+            });
+
+            // Sidebar filter functionality
+            $('.filter-item').on('click', function() {
+                const filterTag = $(this).data('tag');
+
+                // Update active state
+                $('.filter-item').removeClass('active');
+                $(this).addClass('active');
+
+                // Filter effects
+                if (filterTag === 'all') {
+                    $('.effect-card').show();
+                } else {
+                    $('.effect-card').hide();
+                    $('.effect-card[data-tags*="' + filterTag + '"]').show();
+                }
+
+                // Update visible count
+                updateVisibleCount();
+            });
+
+            // Search functionality
+            $('#effects-search').on('input', function() {
+                const searchTerm = $(this).val().toLowerCase();
+
+                if (searchTerm === '') {
+                    // Show all cards matching current filter
+                    const activeFilter = $('.filter-item.active').data('tag');
+                    if (activeFilter === 'all') {
+                        $('.effect-card').show();
+                    } else {
+                        $('.effect-card').hide();
+                        $('.effect-card[data-tags*="' + activeFilter + '"]').show();
+                    }
+                } else {
+                    // Search within current filter
+                    const activeFilter = $('.filter-item.active').data('tag');
+                    $('.effect-card').each(function() {
+                        const name = $(this).data('name');
+                        const tags = $(this).data('tags');
+                        const matchesSearch = name.includes(searchTerm) || tags.includes(searchTerm);
+                        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+
+                        $(this).toggle(matchesSearch && matchesFilter);
+                    });
+                }
+
+                updateVisibleCount();
+            });
+
+            // Update visible count
+            function updateVisibleCount() {
+                const visibleCount = $('.effect-card:visible').length;
+                $('#visible-count').text(visibleCount);
+                $('.filter-item.active .count').text(visibleCount);
+            }
+
+            // Demo button functionality - play animation on preview element
+            $(document).on('click', '.demo-btn', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const $button = $(this);
+                const animationClass = $button.data('class');
+                const $card = $button.closest('.effect-card');
+                const $previewEl = $card.find('.preview-element');
+
+                console.log('Demo button clicked:', animationClass);
+
+                if (!animationClass || !$previewEl.length) {
+                    console.log('Missing animation class or preview element');
+                    return;
+                }
+
+                // Remove animation class if it exists
+                $previewEl.removeClass(animationClass + ' oxy-ani');
+
+                // Force reflow
+                $previewEl[0].offsetHeight;
+
+                // Add animation classes directly
+                $previewEl.addClass('oxy-ani ' + animationClass);
+
+                console.log('Animation triggered with class:', animationClass);
+
+                // Remove classes after animation
+                setTimeout(() => {
+                    $previewEl.removeClass(animationClass + ' oxy-ani');
+                }, 2000);
+            });
+
+            // Copy class button
+            $('.copy-class-btn').on('click', function(e) {
+                e.preventDefault();
+                const classText = $(this).data('class');
+
+                // Create temporary textarea
+                const $temp = $('<textarea>');
+                $('body').append($temp);
+                $temp.val(classText).select();
+                document.execCommand('copy');
+                $temp.remove();
+
+                // Show feedback
+                const originalText = $(this).html();
+                $(this).html('<span class="dashicons dashicons-yes"></span>');
+                setTimeout(() => {
+                    $(this).html(originalText);
+                }, 1000);
+            });
+
+            // Code button - open modal
+            $('.code-btn').on('click', function(e) {
+                e.preventDefault();
+                const effect = $(this).data('effect');
+                const cssClass = $(this).data('css-class');
+                const category = $(this).data('category');
+
+                // Update modal content
+                $('#modal-title').text(effect.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+                $('#modal-subtitle').text('Configure animation settings and copy the code');
+                $('#modal-oxygen-class').text(cssClass);
+
+                // Load attribute controls via AJAX
+                loadAttributeControls(category, effect, cssClass);
+
+                // Show only relevant tabs
+                $('.code-tab').hide();
+                $('.code-tab[data-lang="settings"]').show(); // Always show Settings tab
+                $('.code-tab[data-lang="oxygen"]').show(); // Always show Oxygen tab
+
+                // For CSS animations, show CSS tab for advanced users
+                if (cssClass.includes('oxy-ani-')) {
+                    $('.code-tab[data-lang="css"]').show();
+                }
+
+                // Reset to Settings tab as default
+                $('.code-tab').removeClass('active');
+                $('.code-panel').removeClass('active').hide();
+                $('.code-tab[data-lang="settings"]').addClass('active');
+                $('#modal-settings-content').addClass('active').show();
+
+                // Show modal with animation
+                $('#code-modal').show();
+            });
+
+            // Close modal
+            $('.modal-close').on('click', function() {
+                $(this).closest('.oxy-anim-modal, .oxy-modal').hide();
+            });
+
+            // Code tabs
+            $('.code-tab').on('click', function() {
+                const lang = $(this).data('lang');
+
+                // Update active tab
+                $('.code-tab').removeClass('active');
+                $(this).addClass('active');
+
+                // Show corresponding content
+                $('.code-panel, .code-block').removeClass('active').hide();
+                $('#modal-' + lang + '-content').addClass('active').show();
+            });
+
+            // Close modal on overlay click
+            $('.modal-overlay').on('click', function() {
+                $('#code-modal').hide();
+            });
+
+            // Copy code button in modal
+            $('.copy-btn').on('click', function(e) {
+                e.preventDefault();
+                const targetId = $(this).data('target');
+                const $target = $('#' + targetId);
+                const textToCopy = $target.text();
+
+                // Create temporary textarea
+                const $temp = $('<textarea>');
+                $('body').append($temp);
+                $temp.val(textToCopy).select();
+                document.execCommand('copy');
+                $temp.remove();
+
+                // Show feedback
+                $(this).text('Copied!').addClass('copied');
+                setTimeout(() => {
+                    $(this).text('Copy').removeClass('copied');
+                }, 2000);
+            });
+
+            // Function to load attribute controls via AJAX
+            function loadAttributeControls(category, effect, cssClass) {
+                $.ajax({
+                    url: oxyAnimAdmin.ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'oxy_anim_get_effect_code',
+                        nonce: oxyAnimAdmin.nonce,
+                        category: category,
+                        effect: effect
+                    },
+                    success: function(response) {
+                        if (response.success && response.data.controls) {
+                            $('#attribute-controls-container').html(response.data.controls);
+                            $('#generated-css-output').text(cssClass);
+
+                            // Bind change events to form controls
+                            bindAttributeControls(cssClass);
+                        } else {
+                            $('#attribute-controls-container').html('<p>No configurable options for this animation.</p>');
+                            $('#generated-css-output').text(cssClass);
+                        }
+                    },
+                    error: function() {
+                        $('#attribute-controls-container').html('<p>Error loading animation settings.</p>');
+                        $('#generated-css-output').text(cssClass);
+                    }
+                });
+            }
+
+            // Function to bind attribute control events
+            function bindAttributeControls(baseCssClass) {
+                $(document).off('change', '.animation-settings-form select');
+                $(document).on('change', '.animation-settings-form select', function() {
+                    updateGeneratedCode(baseCssClass);
+                });
+
+                // Initial code generation
+                updateGeneratedCode(baseCssClass);
+            }
+
+            // Function to update generated code based on form values
+            function updateGeneratedCode(baseCssClass) {
+                let generatedClass = baseCssClass;
+                let attributes = [];
+
+                $('.animation-settings-form select').each(function() {
+                    const name = $(this).attr('name');
+                    const value = $(this).val();
+
+                    if (value && value !== '1s' && value !== '0s' && value !== '1' && value !== 'scroll') {
+                        attributes.push(name + '="' + value + '"');
+                    }
+                });
+
+                // Generate duration classes
+                const duration = $('select[name="data-oxy-anim-duration"]').val();
+                if (duration && duration !== '1s') {
+                    if (duration === '0.5s') generatedClass += ' oxy-ani-faster';
+                    else if (duration === '0.8s') generatedClass += ' oxy-ani-fast';
+                    else if (duration === '2s') generatedClass += ' oxy-ani-slow';
+                    else if (duration === '3s') generatedClass += ' oxy-ani-slower';
+                }
+
+                // Generate delay classes
+                const delay = $('select[name="data-oxy-anim-delay"]').val();
+                if (delay && delay !== '0s') {
+                    generatedClass += ' oxy-ani-delay-' + delay.replace('s', '');
+                }
+
+                // Add attributes info if any
+                if (attributes.length > 0) {
+                    generatedClass += '\n\nAttributes to add:\n' + attributes.join('\n');
+                }
+
+                $('#generated-css-output').text(generatedClass);
+            }
+        });
+        </script>
         <?php
     }
 }

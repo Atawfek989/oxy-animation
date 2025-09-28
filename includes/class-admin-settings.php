@@ -79,12 +79,38 @@ class Oxy_Anim_Admin_Settings {
 
     public function enqueue_admin_assets($hook) {
         if (strpos($hook, 'oxy-animation') !== false) {
+            // Load admin CSS
             wp_enqueue_style(
                 'oxy-anim-admin',
                 OXY_ANIM_PLUGIN_URL . 'assets/css/admin.css',
                 array(),
                 OXY_ANIM_VERSION
             );
+
+            // Load animations CSS for previews in admin
+            wp_enqueue_style(
+                'oxy-anim-animations',
+                OXY_ANIM_PLUGIN_URL . 'assets/css/animations.css',
+                array(),
+                OXY_ANIM_VERSION
+            );
+
+            // Load effects showcase CSS (only on effects page)
+            if (strpos($hook, 'oxy-animation-effects') !== false) {
+                wp_enqueue_style(
+                    'oxy-anim-effects-showcase',
+                    OXY_ANIM_PLUGIN_URL . 'assets/css/effects-showcase.css',
+                    array(),
+                    OXY_ANIM_VERSION
+                );
+
+                wp_enqueue_style(
+                    'oxy-anim-effects-modal',
+                    OXY_ANIM_PLUGIN_URL . 'assets/css/effects-modal.css',
+                    array('oxy-anim-effects-showcase'),
+                    OXY_ANIM_VERSION
+                );
+            }
 
             wp_enqueue_script(
                 'oxy-anim-admin',
@@ -248,7 +274,8 @@ class Oxy_Anim_Admin_Settings {
             'shortcode' => $this->generate_shortcode($effect_data),
             'css' => $this->generate_effect_css($effect_data),
             'html' => $this->generate_effect_html($effect_data),
-            'javascript' => $this->generate_effect_js($effect_data)
+            'javascript' => $this->generate_effect_js($effect_data),
+            'controls' => $this->generate_attribute_controls($effect_data)
         );
 
         wp_send_json_success($code_data);
@@ -360,5 +387,36 @@ class Oxy_Anim_Admin_Settings {
                "//     delay: '1s',         // 1s, 2s, 3s, 4s, 5s\n" .
                "//     repeat: '2'          // 1, 2, 3, infinite\n" .
                "// });";
+    }
+
+    private function generate_attribute_controls($effect_data) {
+        if (!isset($effect_data['attributes']) || empty($effect_data['attributes'])) {
+            return '<p style="color: #999; font-style: italic;">No configurable options for this animation.</p>';
+        }
+
+        $controls_html = '<div class="attribute-controls">';
+        $controls_html .= '<h4>Animation Settings</h4>';
+        $controls_html .= '<form class="animation-settings-form">';
+
+        foreach ($effect_data['attributes'] as $attr_name => $attr_config) {
+            $controls_html .= '<div class="control-group">';
+            $controls_html .= '<label for="' . esc_attr($attr_name) . '">' . esc_html($attr_config['label']) . '</label>';
+
+            if ($attr_config['type'] === 'select') {
+                $controls_html .= '<select name="' . esc_attr($attr_name) . '" id="' . esc_attr($attr_name) . '">';
+                foreach ($attr_config['options'] as $value => $label) {
+                    $selected = ($value === $attr_config['default']) ? 'selected' : '';
+                    $controls_html .= '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
+                }
+                $controls_html .= '</select>';
+            }
+
+            $controls_html .= '</div>';
+        }
+
+        $controls_html .= '</form>';
+        $controls_html .= '</div>';
+
+        return $controls_html;
     }
 }
