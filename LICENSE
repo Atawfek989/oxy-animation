@@ -1,0 +1,53 @@
+Oxy Animation Plugin for WordPress
+Copyright (c) 2025 Ahmed Tawfek
+
+Author: Ahmed Tawfek
+Website: https://ahmed-tawfek.com
+Instagram: https://www.instagram.com/ahmedtawfek4/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+=====================================================================
+
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 2, June 1991
+
+ Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+The full text of the GPL v2 can be found at:
+https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+=====================================================================
+
+ADDITIONAL CREDITS AND ACKNOWLEDGMENTS:
+
+This plugin was developed by Ahmed Tawfek to enhance Oxygen Builder
+with advanced animation capabilities.
+
+For support, feature requests, or bug reports, please visit:
+- Website: https://ahmed-tawfek.com
+- Instagram: https://www.instagram.com/ahmedtawfek4/
+
+Third-party libraries and resources used:
+- Intersection Observer API for scroll animations
+- CSS3 Animation specifications
+- WordPress Plugin API
+- Oxygen Builder API
+
+All trademarks, service marks, trade names, product names and logos
+appearing in this plugin are the property of their respective owners.
