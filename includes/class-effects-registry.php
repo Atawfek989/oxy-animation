@@ -692,6 +692,16 @@ class Oxy_Animation_Effects_Registry {
                 )
             )
         );
+
+        // BACKGROUND EFFECTS - Background animations and transitions
+        $this->effects['background'] = array(
+            'name' => 'Background Effects',
+            'icon' => 'dashicons-format-image',
+            'description' => 'Background animations including gradients, colors, and patterns',
+            'effects' => array(
+                // Empty for now - background animations to be added later
+            )
+        );
     }
 
     public function get_all_effects() {

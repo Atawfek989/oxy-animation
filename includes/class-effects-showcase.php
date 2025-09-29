@@ -35,56 +35,79 @@ class Oxy_Animation_Effects_Showcase {
                     <div class="sidebar-filters">
                         <h3>Animation Types</h3>
                         <ul class="filter-list">
+                            <?php
+                            // Calculate total effects count
+                            $total_effects_count = 0;
+                            foreach ($effects as $cat) {
+                                $total_effects_count += count($cat['effects']);
+                            }
+                            ?>
                             <li class="filter-item active" data-tag="all">
                                 <span class="dashicons dashicons-grid-view"></span>
                                 All Animations
-                                <span class="count"><?php echo count($effects['general']['effects']); ?></span>
+                                <span class="count"><?php echo $total_effects_count; ?></span>
                             </li>
+
+                            <?php foreach ($effects as $category_key => $category_data): ?>
                             <li class="filter-section">
-                                <div class="section-header" data-toggle="collapse">
+                                <div class="section-header" data-toggle="collapse" data-category="<?php echo esc_attr($category_key); ?>">
                                     <span class="dashicons dashicons-arrow-down-alt2 toggle-icon"></span>
-                                    <span class="dashicons dashicons-video-alt3"></span>
-                                    Simple Animation
+                                    <span class="<?php echo esc_attr($category_data['icon']); ?>"></span>
+                                    <?php echo esc_html($category_data['name']); ?>
+                                    <span class="category-count"><?php echo count($category_data['effects']); ?></span>
                                 </div>
-                                <ul class="sub-filters" style="display: block;">
-                                    <li class="filter-item" data-tag="attention seekers">
-                                        <span class="dashicons dashicons-star-filled"></span>
-                                        Attention
+                                <ul class="sub-filters" style="display: <?php echo $category_key === 'general' ? 'block' : 'none'; ?>;">
+                                    <?php
+                                    // Get unique tags for this category
+                                    $category_tags = array();
+                                    foreach ($category_data['effects'] as $effect) {
+                                        foreach ($effect['tags'] as $tag) {
+                                            if (!in_array($tag, $category_tags)) {
+                                                $category_tags[] = $tag;
+                                            }
+                                        }
+                                    }
+
+                                    // Display first 8 tags for this category
+                                    $tag_icons = array(
+                                        'attention seekers' => 'dashicons-star-filled',
+                                        'fading entrances' => 'dashicons-images-alt2',
+                                        'fading exits' => 'dashicons-images-alt2',
+                                        'bouncing entrances' => 'dashicons-format-status',
+                                        'bouncing exits' => 'dashicons-format-status',
+                                        'zooming entrances' => 'dashicons-search',
+                                        'zooming exits' => 'dashicons-search',
+                                        'sliding entrances' => 'dashicons-slides',
+                                        'sliding exits' => 'dashicons-slides',
+                                        'rotating entrances' => 'dashicons-image-rotate',
+                                        'rotating exits' => 'dashicons-image-rotate',
+                                        'flippers' => 'dashicons-image-flip-horizontal',
+                                        'lightspeed' => 'dashicons-superhero-alt',
+                                        'specials' => 'dashicons-awards',
+                                        'background' => 'dashicons-format-image',
+                                        'gradient' => 'dashicons-art',
+                                        'color' => 'dashicons-admin-appearance',
+                                        'pattern' => 'dashicons-grid-view',
+                                        'texture' => 'dashicons-editor-textcolor',
+                                        'overlay' => 'dashicons-layout',
+                                        'digital' => 'dashicons-laptop',
+                                        'space' => 'dashicons-star-filled',
+                                        'particles' => 'dashicons-networking'
+                                    );
+
+                                    $displayed_tags = array_slice($category_tags, 0, 8);
+                                    foreach ($displayed_tags as $tag):
+                                        $icon = isset($tag_icons[$tag]) ? $tag_icons[$tag] : 'dashicons-tag';
+                                        $tag_display = ucwords(str_replace(array('-', '_'), ' ', $tag));
+                                    ?>
+                                    <li class="filter-item" data-tag="<?php echo esc_attr($tag); ?>" data-category="<?php echo esc_attr($category_key); ?>">
+                                        <span class="dashicons <?php echo esc_attr($icon); ?>"></span>
+                                        <?php echo esc_html($tag_display); ?>
                                     </li>
-                                    <li class="filter-item" data-tag="fading entrances">
-                                        <span class="dashicons dashicons-images-alt2"></span>
-                                        Fading
-                                    </li>
-                                    <li class="filter-item" data-tag="bouncing entrances">
-                                        <span class="dashicons dashicons-format-status"></span>
-                                        Bouncing
-                                    </li>
-                                    <li class="filter-item" data-tag="zooming entrances">
-                                        <span class="dashicons dashicons-search"></span>
-                                        Zooming
-                                    </li>
-                                    <li class="filter-item" data-tag="sliding entrances">
-                                        <span class="dashicons dashicons-slides"></span>
-                                        Sliding
-                                    </li>
-                                    <li class="filter-item" data-tag="rotating entrances">
-                                        <span class="dashicons dashicons-image-rotate"></span>
-                                        Rotating
-                                    </li>
-                                    <li class="filter-item" data-tag="flippers">
-                                        <span class="dashicons dashicons-image-flip-horizontal"></span>
-                                        Flippers
-                                    </li>
-                                    <li class="filter-item" data-tag="lightspeed">
-                                        <span class="dashicons dashicons-superhero-alt"></span>
-                                        Lightspeed
-                                    </li>
-                                    <li class="filter-item" data-tag="specials">
-                                        <span class="dashicons dashicons-awards"></span>
-                                        Specials
-                                    </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
@@ -94,24 +117,28 @@ class Oxy_Animation_Effects_Showcase {
                     <!-- Effects Grid -->
                     <div class="effects-grid">
                 <?php
-                $general = $effects['general'];
-                $count = 0;
+                $total_count = 0;
+
+                // Loop through all categories dynamically
+                foreach ($effects as $category_key => $category_data):
+                    $category_count = 0;
                 ?>
-                <div class="category-section" data-category="general">
+                <div class="category-section" data-category="<?php echo esc_attr($category_key); ?>">
                     <div class="category-header">
                         <h2 class="category-title">
-                            <span class="<?php echo esc_attr($general['icon']); ?>"></span>
-                            <?php echo esc_html($general['name']); ?>
+                            <span class="<?php echo esc_attr($category_data['icon']); ?>"></span>
+                            <?php echo esc_html($category_data['name']); ?>
                         </h2>
                         <div class="effects-count">
-                            <span class="count-number" id="visible-count"><?php echo count($general['effects']); ?></span>
+                            <span class="count-number"><?php echo count($category_data['effects']); ?></span>
                             <span class="count-label">effects available</span>
                         </div>
                     </div>
 
                     <div class="effects-list">
-                        <?php foreach ($general['effects'] as $effect_key => $effect):
-                            $count++;
+                        <?php foreach ($category_data['effects'] as $effect_key => $effect):
+                            $total_count++;
+                            $category_count++;
                         ?>
                             <div class="effect-card"
                                  data-effect="<?php echo esc_attr($effect_key); ?>"
@@ -133,7 +160,7 @@ class Oxy_Animation_Effects_Showcase {
                                 <div class="effect-info">
                                     <div class="effect-header">
                                         <h3 class="effect-title"><?php echo esc_html($effect['name']); ?></h3>
-                                        <span class="effect-number">#<?php echo $count; ?></span>
+                                        <span class="effect-number">#<?php echo $category_count; ?></span>
                                     </div>
 
                                     <p class="effect-description"><?php echo esc_html($effect['preview']); ?></p>
@@ -150,7 +177,7 @@ class Oxy_Animation_Effects_Showcase {
                                                 data-effect="<?php echo esc_attr($effect_key); ?>"
                                                 data-type="css"
                                                 data-css-class="<?php echo esc_attr($effect['class']); ?>"
-                                                data-category="general">
+                                                data-category="<?php echo esc_attr($category_key); ?>">
                                             <span class="dashicons dashicons-editor-code"></span> Get Code
                                         </button>
                                         <button class="button copy-class-btn"
@@ -169,6 +196,7 @@ class Oxy_Animation_Effects_Showcase {
                         <?php endforeach; ?>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
                 </div><!-- .effects-main-content -->
             </div><!-- .showcase-layout -->

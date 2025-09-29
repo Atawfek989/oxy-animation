@@ -152,8 +152,8 @@ class Oxy_Anim_Admin_Settings {
     public function render_effects_library_page() {
         ?>
         <div class="wrap">
-            <h1><?php _e('Animation Effects Library', 'oxy-animation-pro'); ?></h1>
-            <p><?php _e('Effects library is ready for new animations to be added.', 'oxy-animation-pro'); ?></p>
+            <!-- <h1><?php _e('Animation Effects Librarymn', 'oxy-animation-pro'); ?></h1>
+            <p><?php _e('Effects library is ready for new animations to be added.', 'oxy-animation-pro'); ?></p> -->
 
             <!-- Effects Showcase will be loaded here -->
             <?php
