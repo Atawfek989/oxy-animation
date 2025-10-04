@@ -220,6 +220,55 @@
                     element.setAttribute('data-oxy-trigger', trigger);
                 }
             }
+
+            // Handle Ken Burns specific attributes
+            if (element.classList.contains('oxy-ani-ken-burns')) {
+                updateKenBurnsAttributes(element);
+            }
+        }
+    }
+
+    /**
+     * Update Ken Burns specific attributes
+     */
+    function updateKenBurnsAttributes(element) {
+        // Get Ken Burns specific attributes
+        const direction = element.getAttribute('data-ken-burns-direction');
+        const scale = element.getAttribute('data-ken-burns-scale');
+        const origin = element.getAttribute('data-ken-burns-origin');
+
+        // Apply direction (this is handled by CSS selectors, just ensure it's set)
+        if (direction) {
+            element.setAttribute('data-ken-burns-direction', direction);
+        } else {
+            element.setAttribute('data-ken-burns-direction', 'zoom-in');
+        }
+
+        // Apply scale as CSS custom property
+        if (scale) {
+            element.style.setProperty('--ken-burns-scale', scale);
+        } else {
+            element.style.setProperty('--ken-burns-scale', '1.2');
+        }
+
+        // Apply transform origin as CSS custom property
+        if (origin) {
+            // Convert origin values to CSS format
+            const originMap = {
+                'top-left': 'top left',
+                'top-right': 'top right',
+                'bottom-left': 'bottom left',
+                'bottom-right': 'bottom right',
+                'top-center': 'top center',
+                'bottom-center': 'bottom center',
+                'left-center': 'left center',
+                'right-center': 'right center',
+                'center': 'center'
+            };
+            const cssOrigin = originMap[origin] || 'center';
+            element.style.setProperty('--ken-burns-origin', cssOrigin);
+        } else {
+            element.style.setProperty('--ken-burns-origin', 'center');
         }
     }
 

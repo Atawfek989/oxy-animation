@@ -250,6 +250,53 @@ function oxy_anim_ensure_basic_animations() {
         if (playState) {
             element.style.setProperty('animation-play-state', playState, 'important');
         }
+
+        // Handle Ken Burns specific attributes
+        if (element.classList.contains('oxy-ani-ken-burns')) {
+            applyKenBurnsAttributes(element);
+        }
+    }
+
+    // Apply Ken Burns specific attributes
+    function applyKenBurnsAttributes(element) {
+        // Get Ken Burns specific attributes
+        const direction = element.getAttribute('data-ken-burns-direction');
+        const scale = element.getAttribute('data-ken-burns-scale');
+        const origin = element.getAttribute('data-ken-burns-origin');
+
+        // Apply direction (this is handled by CSS selectors, just ensure it's set)
+        if (direction) {
+            element.setAttribute('data-ken-burns-direction', direction);
+        } else {
+            element.setAttribute('data-ken-burns-direction', 'zoom-in');
+        }
+
+        // Apply scale as CSS custom property
+        if (scale) {
+            element.style.setProperty('--ken-burns-scale', scale);
+        } else {
+            element.style.setProperty('--ken-burns-scale', '1.2');
+        }
+
+        // Apply transform origin as CSS custom property
+        if (origin) {
+            // Convert origin values to CSS format
+            const originMap = {
+                'top-left': 'top left',
+                'top-right': 'top right',
+                'bottom-left': 'bottom left',
+                'bottom-right': 'bottom right',
+                'top-center': 'top center',
+                'bottom-center': 'bottom center',
+                'left-center': 'left center',
+                'right-center': 'right center',
+                'center': 'center'
+            };
+            const cssOrigin = originMap[origin] || 'center';
+            element.style.setProperty('--ken-burns-origin', cssOrigin);
+        } else {
+            element.style.setProperty('--ken-burns-origin', 'center');
+        }
     }
 
     // Handle different animation triggers
@@ -333,6 +380,11 @@ function oxy_anim_ensure_basic_animations() {
                         if (options.repeat) el.setAttribute('data-oxy-anim-repeat', options.repeat);
                         if (options.timing) el.setAttribute('data-oxy-anim-timing', options.timing);
                         if (options.direction) el.setAttribute('data-oxy-anim-direction', options.direction);
+
+                        // Ken Burns specific options
+                        if (options.kenBurnsDirection) el.setAttribute('data-ken-burns-direction', options.kenBurnsDirection);
+                        if (options.kenBurnsScale) el.setAttribute('data-ken-burns-scale', options.kenBurnsScale);
+                        if (options.kenBurnsOrigin) el.setAttribute('data-ken-burns-origin', options.kenBurnsOrigin);
                     }
 
                     // Apply attributes
@@ -356,6 +408,43 @@ function oxy_anim_ensure_basic_animations() {
                     elements[i].offsetHeight;
                     elements[i].style.animation = null;
                 }
+            },
+            testKenBurns: function() {
+                console.log('=== Ken Burns Test ===');
+
+                // Create a test element with background image
+                const testDiv = document.createElement('div');
+                testDiv.innerHTML = 'KEN BURNS TEST';
+                testDiv.className = 'oxy-ani oxy-ani-ken-burns';
+                testDiv.setAttribute('data-oxy-anim-duration', '3s');
+                testDiv.setAttribute('data-ken-burns-direction', 'zoom-pan-right');
+                testDiv.setAttribute('data-ken-burns-scale', '1.5');
+                testDiv.setAttribute('data-ken-burns-origin', 'top-left');
+                testDiv.style.cssText = 'position:fixed;top:50px;right:50px;width:300px;height:200px;background-image:url("https://picsum.photos/400/300");z-index:99999;border:3px solid red;color:white;text-align:center;line-height:200px;font-weight:bold;';
+
+                document.body.appendChild(testDiv);
+
+                console.log('Before processing attributes:');
+                console.log('data-ken-burns-direction:', testDiv.getAttribute('data-ken-burns-direction'));
+                console.log('data-ken-burns-scale:', testDiv.getAttribute('data-ken-burns-scale'));
+                console.log('data-ken-burns-origin:', testDiv.getAttribute('data-ken-burns-origin'));
+
+                // Apply Ken Burns attributes
+                applyKenBurnsAttributes(testDiv);
+
+                console.log('After processing attributes:');
+                console.log('--ken-burns-scale:', testDiv.style.getPropertyValue('--ken-burns-scale'));
+                console.log('--ken-burns-origin:', testDiv.style.getPropertyValue('--ken-burns-origin'));
+                console.log('data-ken-burns-direction:', testDiv.getAttribute('data-ken-burns-direction'));
+
+                // Clean up after 8 seconds
+                setTimeout(() => {
+                    if (testDiv.parentNode) {
+                        document.body.removeChild(testDiv);
+                    }
+                }, 8000);
+
+                console.log('Ken Burns test element created. Should show zoom-pan-right with 1.5x scale from top-left origin.');
             },
         };
     }

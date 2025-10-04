@@ -1211,3 +1211,186 @@
   opacity: 1;
 }
 
+/* ========================================
+   BACKGROUND EFFECTS - KEN BURNS
+   ======================================== */
+
+/* Base Ken Burns Effect */
+.oxy-ani-ken-burns {
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.oxy-ani-ken-burns::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  background-repeat: inherit;
+  animation-duration: inherit;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: inherit;
+  animation-fill-mode: both;
+  animation-delay: inherit;
+}
+
+/* === ZOOM EFFECTS === */
+
+/* Zoom In */
+@keyframes ken-burns-zoom-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(var(--ken-burns-scale, 1.2));
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-in"]::before {
+  animation-name: ken-burns-zoom-in;
+  transform-origin: var(--ken-burns-origin, center);
+}
+
+/* Zoom Out */
+@keyframes ken-burns-zoom-out {
+  0% {
+    transform: scale(var(--ken-burns-scale, 1.2));
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-out"]::before {
+  animation-name: ken-burns-zoom-out;
+  transform-origin: var(--ken-burns-origin, center);
+}
+
+/* === PAN EFFECTS === */
+
+/* Pan Left */
+@keyframes ken-burns-pan-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="pan-left"]::before {
+  animation-name: ken-burns-pan-left;
+}
+
+/* Pan Right */
+@keyframes ken-burns-pan-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="pan-right"]::before {
+  animation-name: ken-burns-pan-right;
+}
+
+/* Pan Up */
+@keyframes ken-burns-pan-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="pan-up"]::before {
+  animation-name: ken-burns-pan-up;
+}
+
+/* Pan Down */
+@keyframes ken-burns-pan-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="pan-down"]::before {
+  animation-name: ken-burns-pan-down;
+}
+
+/* === COMBINATION EFFECTS === */
+
+/* Zoom + Pan Left */
+@keyframes ken-burns-zoom-pan-left {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(var(--ken-burns-scale, 1.2)) translateX(-5%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-pan-left"]::before {
+  animation-name: ken-burns-zoom-pan-left;
+  transform-origin: var(--ken-burns-origin, center);
+}
+
+/* Zoom + Pan Right */
+@keyframes ken-burns-zoom-pan-right {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(var(--ken-burns-scale, 1.2)) translateX(5%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-pan-right"]::before {
+  animation-name: ken-burns-zoom-pan-right;
+  transform-origin: var(--ken-burns-origin, center);
+}
+
+/* Zoom + Pan Up */
+@keyframes ken-burns-zoom-pan-up {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(var(--ken-burns-scale, 1.2)) translateY(-5%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-pan-up"]::before {
+  animation-name: ken-burns-zoom-pan-up;
+  transform-origin: var(--ken-burns-origin, center);
+}
+
+/* Zoom + Pan Down */
+@keyframes ken-burns-zoom-pan-down {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(var(--ken-burns-scale, 1.2)) translateY(5%);
+  }
+}
+
+.oxy-ani-ken-burns[data-ken-burns-direction="zoom-pan-down"]::before {
+  animation-name: ken-burns-zoom-pan-down;
+  transform-origin: var(--ken-burns-origin, center);
+}
+

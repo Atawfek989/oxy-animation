@@ -699,7 +699,58 @@ class Oxy_Animation_Effects_Registry {
             'icon' => 'dashicons-format-image',
             'description' => 'Background animations including gradients, colors, and patterns',
             'effects' => array(
-                // Empty for now - background animations to be added later
+                'ken-burns' => array(
+                    'name' => 'Ken Burns',
+                    'class' => 'oxy-ani-ken-burns',
+                    'preview' => 'Classic cinematic zoom and pan effect for background images',
+                    'tags' => array('background', 'image', 'cinematic', 'zoom', 'pan'),
+                    'attributes' => array_merge($standard_attributes, array(
+                        'data-ken-burns-direction' => array(
+                            'label' => 'Direction',
+                            'type' => 'select',
+                            'options' => array(
+                                'zoom-in' => 'Zoom In',
+                                'zoom-out' => 'Zoom Out',
+                                'pan-left' => 'Pan Left',
+                                'pan-right' => 'Pan Right',
+                                'pan-up' => 'Pan Up',
+                                'pan-down' => 'Pan Down',
+                                'zoom-pan-left' => 'Zoom + Pan Left',
+                                'zoom-pan-right' => 'Zoom + Pan Right',
+                                'zoom-pan-up' => 'Zoom + Pan Up',
+                                'zoom-pan-down' => 'Zoom + Pan Down'
+                            ),
+                            'default' => 'zoom-in'
+                        ),
+                        'data-ken-burns-scale' => array(
+                            'label' => 'Scale Amount',
+                            'type' => 'select',
+                            'options' => array(
+                                '1.1' => 'Subtle (1.1x)',
+                                '1.2' => 'Normal (1.2x)',
+                                '1.3' => 'Strong (1.3x)',
+                                '1.5' => 'Dramatic (1.5x)'
+                            ),
+                            'default' => '1.2'
+                        ),
+                        'data-ken-burns-origin' => array(
+                            'label' => 'Transform Origin',
+                            'type' => 'select',
+                            'options' => array(
+                                'center' => 'Center',
+                                'top-left' => 'Top Left',
+                                'top-right' => 'Top Right',
+                                'bottom-left' => 'Bottom Left',
+                                'bottom-right' => 'Bottom Right',
+                                'top-center' => 'Top Center',
+                                'bottom-center' => 'Bottom Center',
+                                'left-center' => 'Left Center',
+                                'right-center' => 'Right Center'
+                            ),
+                            'default' => 'center'
+                        )
+                    ))
+                )
             )
         );
     }
