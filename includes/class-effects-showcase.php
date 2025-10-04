@@ -49,63 +49,10 @@ class Oxy_Animation_Effects_Showcase {
                             </li>
 
                             <?php foreach ($effects as $category_key => $category_data): ?>
-                            <li class="filter-section">
-                                <div class="section-header" data-toggle="collapse" data-category="<?php echo esc_attr($category_key); ?>">
-                                    <span class="dashicons dashicons-arrow-down-alt2 toggle-icon"></span>
-                                    <span class="<?php echo esc_attr($category_data['icon']); ?>"></span>
-                                    <?php echo esc_html($category_data['name']); ?>
-                                    <span class="category-count"><?php echo count($category_data['effects']); ?></span>
-                                </div>
-                                <ul class="sub-filters" style="display: <?php echo $category_key === 'general' ? 'block' : 'none'; ?>;">
-                                    <?php
-                                    // Get unique tags for this category
-                                    $category_tags = array();
-                                    foreach ($category_data['effects'] as $effect) {
-                                        foreach ($effect['tags'] as $tag) {
-                                            if (!in_array($tag, $category_tags)) {
-                                                $category_tags[] = $tag;
-                                            }
-                                        }
-                                    }
-
-                                    // Display first 8 tags for this category
-                                    $tag_icons = array(
-                                        'attention seekers' => 'dashicons-star-filled',
-                                        'fading entrances' => 'dashicons-images-alt2',
-                                        'fading exits' => 'dashicons-images-alt2',
-                                        'bouncing entrances' => 'dashicons-format-status',
-                                        'bouncing exits' => 'dashicons-format-status',
-                                        'zooming entrances' => 'dashicons-search',
-                                        'zooming exits' => 'dashicons-search',
-                                        'sliding entrances' => 'dashicons-slides',
-                                        'sliding exits' => 'dashicons-slides',
-                                        'rotating entrances' => 'dashicons-image-rotate',
-                                        'rotating exits' => 'dashicons-image-rotate',
-                                        'flippers' => 'dashicons-image-flip-horizontal',
-                                        'lightspeed' => 'dashicons-superhero-alt',
-                                        'specials' => 'dashicons-awards',
-                                        'background' => 'dashicons-format-image',
-                                        'gradient' => 'dashicons-art',
-                                        'color' => 'dashicons-admin-appearance',
-                                        'pattern' => 'dashicons-grid-view',
-                                        'texture' => 'dashicons-editor-textcolor',
-                                        'overlay' => 'dashicons-layout',
-                                        'digital' => 'dashicons-laptop',
-                                        'space' => 'dashicons-star-filled',
-                                        'particles' => 'dashicons-networking'
-                                    );
-
-                                    $displayed_tags = array_slice($category_tags, 0, 8);
-                                    foreach ($displayed_tags as $tag):
-                                        $icon = isset($tag_icons[$tag]) ? $tag_icons[$tag] : 'dashicons-tag';
-                                        $tag_display = ucwords(str_replace(array('-', '_'), ' ', $tag));
-                                    ?>
-                                    <li class="filter-item" data-tag="<?php echo esc_attr($tag); ?>" data-category="<?php echo esc_attr($category_key); ?>">
-                                        <span class="dashicons <?php echo esc_attr($icon); ?>"></span>
-                                        <?php echo esc_html($tag_display); ?>
-                                    </li>
-                                    <?php endforeach; ?>
-                                </ul>
+                            <li class="filter-item" data-category="<?php echo esc_attr($category_key); ?>">
+                                <span class="dashicons <?php echo esc_attr($category_data['icon']); ?>"></span>
+                                <?php echo esc_html($category_data['name']); ?>
+                                <span class="count"><?php echo count($category_data['effects']); ?></span>
                             </li>
                             <?php endforeach; ?>
                         </ul>
@@ -365,6 +312,9 @@ class Oxy_Animation_Effects_Showcase {
 
         <script>
         jQuery(document).ready(function($) {
+            // Initialize counts on page load
+            updateVisibleCount();
+
             // Toggle Simple Animation section
             $('.section-header[data-toggle="collapse"]').on('click', function() {
                 const $header = $(this);
@@ -385,17 +335,23 @@ class Oxy_Animation_Effects_Showcase {
             // Sidebar filter functionality
             $('.filter-item').on('click', function() {
                 const filterTag = $(this).data('tag');
+                const filterCategory = $(this).data('category');
 
                 // Update active state
                 $('.filter-item').removeClass('active');
                 $(this).addClass('active');
 
-                // Filter effects
+                // Filter effects by category
                 if (filterTag === 'all') {
+                    $('.category-section').show();
                     $('.effect-card').show();
-                } else {
+                } else if (filterCategory) {
+                    // Hide all categories first
+                    $('.category-section').hide();
+                    // Show only the selected category
+                    $('.category-section[data-category="' + filterCategory + '"]').show();
                     $('.effect-card').hide();
-                    $('.effect-card[data-tags*="' + filterTag + '"]').show();
+                    $('.category-section[data-category="' + filterCategory + '"] .effect-card').show();
                 }
 
                 // Update visible count
@@ -405,27 +361,49 @@ class Oxy_Animation_Effects_Showcase {
             // Search functionality
             $('#effects-search').on('input', function() {
                 const searchTerm = $(this).val().toLowerCase();
+                const activeFilter = $('.filter-item.active').data('tag');
+                const activeCategory = $('.filter-item.active').data('category');
 
                 if (searchTerm === '') {
                     // Show all cards matching current filter
-                    const activeFilter = $('.filter-item.active').data('tag');
                     if (activeFilter === 'all') {
+                        $('.category-section').show();
                         $('.effect-card').show();
-                    } else {
+                    } else if (activeCategory) {
+                        $('.category-section').hide();
+                        $('.category-section[data-category="' + activeCategory + '"]').show();
                         $('.effect-card').hide();
-                        $('.effect-card[data-tags*="' + activeFilter + '"]').show();
+                        $('.category-section[data-category="' + activeCategory + '"] .effect-card').show();
                     }
                 } else {
-                    // Search within current filter
-                    const activeFilter = $('.filter-item.active').data('tag');
-                    $('.effect-card').each(function() {
-                        const name = $(this).data('name');
-                        const tags = $(this).data('tags');
-                        const matchesSearch = name.includes(searchTerm) || tags.includes(searchTerm);
-                        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+                    // Search across all or within category
+                    if (activeFilter === 'all') {
+                        $('.category-section').each(function() {
+                            const $section = $(this);
+                            let hasVisibleCards = false;
 
-                        $(this).toggle(matchesSearch && matchesFilter);
-                    });
+                            $section.find('.effect-card').each(function() {
+                                const name = $(this).data('name');
+                                const tags = $(this).data('tags');
+                                const matches = name.includes(searchTerm) || tags.includes(searchTerm);
+                                $(this).toggle(matches);
+                                if (matches) hasVisibleCards = true;
+                            });
+
+                            $section.toggle(hasVisibleCards);
+                        });
+                    } else if (activeCategory) {
+                        $('.category-section').hide();
+                        const $activeSection = $('.category-section[data-category="' + activeCategory + '"]');
+                        $activeSection.show();
+
+                        $activeSection.find('.effect-card').each(function() {
+                            const name = $(this).data('name');
+                            const tags = $(this).data('tags');
+                            const matches = name.includes(searchTerm) || tags.includes(searchTerm);
+                            $(this).toggle(matches);
+                        });
+                    }
                 }
 
                 updateVisibleCount();
@@ -434,7 +412,6 @@ class Oxy_Animation_Effects_Showcase {
             // Update visible count
             function updateVisibleCount() {
                 const visibleCount = $('.effect-card:visible').length;
-                $('#visible-count').text(visibleCount);
                 $('.filter-item.active .count').text(visibleCount);
             }
 
