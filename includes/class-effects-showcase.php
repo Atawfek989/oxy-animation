@@ -580,8 +580,15 @@ class Oxy_Animation_Effects_Showcase {
 
             // Function to bind attribute control events
             function bindAttributeControls(baseCssClass) {
+                // Bind change event for select elements
                 $(document).off('change', '.animation-settings-form select');
                 $(document).on('change', '.animation-settings-form select', function() {
+                    updateGeneratedCode(baseCssClass);
+                });
+
+                // Bind input event for text fields (triggers on typing)
+                $(document).off('input', '.animation-settings-form input[type="text"]');
+                $(document).on('input', '.animation-settings-form input[type="text"]', function() {
                     updateGeneratedCode(baseCssClass);
                 });
 
@@ -594,11 +601,22 @@ class Oxy_Animation_Effects_Showcase {
                 let generatedClass = baseCssClass;
                 let attributes = [];
 
+                // Get values from select elements
                 $('.animation-settings-form select').each(function() {
                     const name = $(this).attr('name');
                     const value = $(this).val();
 
                     if (value && value !== '1s' && value !== '0s' && value !== '1' && value !== 'scroll') {
+                        attributes.push(name + '="' + value + '"');
+                    }
+                });
+
+                // Get values from text input elements
+                $('.animation-settings-form input[type="text"]').each(function() {
+                    const name = $(this).attr('name');
+                    const value = $(this).val();
+
+                    if (value && value.trim() !== '') {
                         attributes.push(name + '="' + value + '"');
                     }
                 });

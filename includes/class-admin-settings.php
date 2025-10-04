@@ -409,6 +409,13 @@ class Oxy_Anim_Admin_Settings {
                     $controls_html .= '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
                 }
                 $controls_html .= '</select>';
+            } elseif ($attr_config['type'] === 'text') {
+                $default_value = isset($attr_config['default']) ? $attr_config['default'] : '';
+                $placeholder = isset($attr_config['description']) ? $attr_config['description'] : '';
+                $controls_html .= '<input type="text" name="' . esc_attr($attr_name) . '" id="' . esc_attr($attr_name) . '" value="' . esc_attr($default_value) . '" placeholder="' . esc_attr($placeholder) . '" />';
+                if (!empty($attr_config['description'])) {
+                    $controls_html .= '<small class="description">' . esc_html($attr_config['description']) . '</small>';
+                }
             }
 
             $controls_html .= '</div>';

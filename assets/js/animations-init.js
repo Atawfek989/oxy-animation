@@ -225,6 +225,16 @@
             if (element.classList.contains('oxy-ani-ken-burns')) {
                 updateKenBurnsAttributes(element);
             }
+
+            // Handle Background Banner specific attributes
+            if (element.classList.contains('oxy-ani-bg-ban')) {
+                updateBgBanAttributes(element);
+            }
+
+            // Handle Color Background specific attributes
+            if (element.classList.contains('oxy-ani-color-bg')) {
+                updateColorBgAttributes(element);
+            }
         }
     }
 
@@ -269,6 +279,88 @@
             element.style.setProperty('--ken-burns-origin', cssOrigin);
         } else {
             element.style.setProperty('--ken-burns-origin', 'center');
+        }
+    }
+
+    /**
+     * Update Background Banner specific attributes
+     */
+    function updateBgBanAttributes(element) {
+        // Get Bg-ban specific attributes
+        const direction = element.getAttribute('data-bg-ban-direction');
+        const speed = element.getAttribute('data-bg-ban-speed');
+        const size = element.getAttribute('data-bg-ban-size');
+        const opacity = element.getAttribute('data-bg-ban-opacity');
+
+        // Apply direction (this is handled by CSS selectors, just ensure it's set)
+        if (direction) {
+            element.setAttribute('data-bg-ban-direction', direction);
+        } else {
+            element.setAttribute('data-bg-ban-direction', 'left-to-right');
+        }
+
+        // Apply speed (this is handled by CSS selectors, just ensure it's set)
+        if (speed) {
+            element.setAttribute('data-bg-ban-speed', speed);
+        } else {
+            element.setAttribute('data-bg-ban-speed', 'normal');
+        }
+
+        // Apply size as CSS custom property
+        if (size) {
+            element.style.setProperty('--bg-ban-size', size);
+        } else {
+            element.style.setProperty('--bg-ban-size', '200%');
+        }
+
+        // Apply opacity as CSS custom property
+        if (opacity) {
+            element.style.setProperty('--bg-ban-opacity', opacity);
+        } else {
+            element.style.setProperty('--bg-ban-opacity', '1');
+        }
+    }
+
+    /**
+     * Update Color Background specific attributes
+     */
+    function updateColorBgAttributes(element) {
+        // Get Color BG specific attributes
+        const colorFrom = element.getAttribute('data-color-bg-from');
+        const colorTo = element.getAttribute('data-color-bg-to');
+        const timing = element.getAttribute('data-color-bg-timing');
+        const direction = element.getAttribute('data-color-bg-direction');
+        const fill = element.getAttribute('data-color-bg-fill');
+
+        // Apply color from as CSS custom property
+        if (colorFrom) {
+            element.style.setProperty('--color-bg-from', colorFrom);
+        }
+
+        // Apply color to as CSS custom property
+        if (colorTo) {
+            element.style.setProperty('--color-bg-to', colorTo);
+        }
+
+        // Apply timing function
+        if (timing) {
+            element.style.setProperty('animation-timing-function', timing, 'important');
+        } else {
+            element.style.setProperty('animation-timing-function', 'ease-in-out', 'important');
+        }
+
+        // Apply animation direction
+        if (direction) {
+            element.style.setProperty('animation-direction', direction, 'important');
+        } else {
+            element.style.setProperty('animation-direction', 'alternate', 'important');
+        }
+
+        // Apply fill mode
+        if (fill) {
+            element.style.setProperty('animation-fill-mode', fill, 'important');
+        } else {
+            element.style.setProperty('animation-fill-mode', 'both', 'important');
         }
     }
 

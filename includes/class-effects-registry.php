@@ -750,6 +750,111 @@ class Oxy_Animation_Effects_Registry {
                             'default' => 'center'
                         )
                     ))
+                ),
+                'bg-ban' => array(
+                    'name' => 'Background Banner',
+                    'class' => 'oxy-ani-bg-ban',
+                    'preview' => 'Animated background banner effect with sliding movements for backgrounds and colors',
+                    'tags' => array('background', 'banner', 'slide', 'colors', 'image'),
+                    'attributes' => array_merge($standard_attributes, array(
+                        'data-bg-ban-direction' => array(
+                            'label' => 'Direction',
+                            'type' => 'select',
+                            'options' => array(
+                                'left-to-right' => 'Left to Right',
+                                'right-to-left' => 'Right to Left',
+                                'top-to-bottom' => 'Top to Bottom',
+                                'bottom-to-top' => 'Bottom to Top',
+                                'diagonal-tl-br' => 'Diagonal (Top-Left to Bottom-Right)',
+                                'diagonal-tr-bl' => 'Diagonal (Top-Right to Bottom-Left)',
+                                'diagonal-bl-tr' => 'Diagonal (Bottom-Left to Top-Right)',
+                                'diagonal-br-tl' => 'Diagonal (Bottom-Right to Top-Left)'
+                            ),
+                            'default' => 'left-to-right',
+                            'description' => 'Direction of the banner animation'
+                        ),
+                        'data-bg-ban-speed' => array(
+                            'label' => 'Speed',
+                            'type' => 'select',
+                            'options' => array(
+                                'slow' => 'Slow (20s)',
+                                'normal' => 'Normal (10s)',
+                                'fast' => 'Fast (5s)'
+                            ),
+                            'default' => 'normal',
+                            'description' => 'Animation speed'
+                        ),
+                        'data-bg-ban-size' => array(
+                            'label' => 'Banner Size',
+                            'type' => 'text',
+                            'default' => '200%',
+                            'description' => 'Size of the background (e.g., 150%, 200%, 250%)'
+                        ),
+                        'data-bg-ban-opacity' => array(
+                            'label' => 'Opacity',
+                            'type' => 'text',
+                            'default' => '1',
+                            'description' => 'Opacity value between 0 and 1'
+                        )
+                    ))
+                ),
+                'color-bg' => array(
+                    'name' => 'Color Background',
+                    'class' => 'oxy-ani-color-bg',
+                    'preview' => 'Animated background color transitions - use with solid colors or gradients',
+                    'tags' => array('background', 'color', 'gradient', 'transition'),
+                    'attributes' => array_merge($standard_attributes, array(
+                        'data-color-bg-from' => array(
+                            'label' => 'Color From',
+                            'type' => 'text',
+                            'default' => '',
+                            'description' => 'Starting color (e.g., #ff0000, rgb(255,0,0), or leave empty to use element background)'
+                        ),
+                        'data-color-bg-to' => array(
+                            'label' => 'Color To',
+                            'type' => 'text',
+                            'default' => '',
+                            'description' => 'Ending color (e.g., #00ff00, rgb(0,255,0), or leave empty to use element background)'
+                        ),
+                        'data-color-bg-timing' => array(
+                            'label' => 'Timing Function',
+                            'type' => 'select',
+                            'options' => array(
+                                'linear' => 'Linear',
+                                'ease' => 'Ease',
+                                'ease-in' => 'Ease In',
+                                'ease-out' => 'Ease Out',
+                                'ease-in-out' => 'Ease In Out',
+                                'cubic-bezier(0.68, -0.55, 0.265, 1.55)' => 'Back'
+                            ),
+                            'default' => 'ease-in-out',
+                            'description' => 'Animation timing function'
+                        ),
+                        'data-color-bg-direction' => array(
+                            'label' => 'Direction',
+                            'type' => 'select',
+                            'options' => array(
+                                'normal' => 'Normal',
+                                'reverse' => 'Reverse',
+                                'alternate' => 'Alternate',
+                                'alternate-reverse' => 'Alternate Reverse'
+                            ),
+                            'default' => 'alternate',
+                            'description' => 'Animation direction'
+                        ),
+                        'data-color-bg-fill' => array(
+                            'label' => 'Fill Mode',
+                            'type' => 'select',
+                            'options' => array(
+                                'none' => 'None',
+                                'forwards' => 'Forwards',
+                                'backwards' => 'Backwards',
+                                'both' => 'Both'
+                            ),
+                            'default' => 'both',
+                            'description' => 'Animation fill mode'
+                        )
+                    ))
                 )
             )
         );

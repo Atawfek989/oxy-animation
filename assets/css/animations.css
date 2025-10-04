@@ -1394,3 +1394,182 @@
   transform-origin: var(--ken-burns-origin, center);
 }
 
+/* =============================================
+   BACKGROUND BANNER EFFECT
+   ============================================= */
+
+.oxy-ani-bg-ban {
+  position: relative;
+  overflow: hidden;
+}
+
+.oxy-ani-bg-ban::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  background-size: var(--bg-ban-size, 200%);
+  opacity: var(--bg-ban-opacity, 1);
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 0;
+}
+
+.oxy-ani-bg-ban > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Speed variations */
+.oxy-ani-bg-ban[data-bg-ban-speed="slow"]::before {
+  animation-duration: 20s;
+}
+
+.oxy-ani-bg-ban[data-bg-ban-speed="normal"]::before {
+  animation-duration: 10s;
+}
+
+.oxy-ani-bg-ban[data-bg-ban-speed="fast"]::before {
+  animation-duration: 5s;
+}
+
+/* Direction: Left to Right */
+@keyframes bg-ban-left-to-right {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="left-to-right"]::before {
+  animation-name: bg-ban-left-to-right;
+}
+
+/* Direction: Right to Left */
+@keyframes bg-ban-right-to-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="right-to-left"]::before {
+  animation-name: bg-ban-right-to-left;
+}
+
+/* Direction: Top to Bottom */
+@keyframes bg-ban-top-to-bottom {
+  0% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 50% 100%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="top-to-bottom"]::before {
+  animation-name: bg-ban-top-to-bottom;
+}
+
+/* Direction: Bottom to Top */
+@keyframes bg-ban-bottom-to-top {
+  0% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="bottom-to-top"]::before {
+  animation-name: bg-ban-bottom-to-top;
+}
+
+/* Direction: Diagonal Top-Left to Bottom-Right */
+@keyframes bg-ban-diagonal-tl-br {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="diagonal-tl-br"]::before {
+  animation-name: bg-ban-diagonal-tl-br;
+}
+
+/* Direction: Diagonal Top-Right to Bottom-Left */
+@keyframes bg-ban-diagonal-tr-bl {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="diagonal-tr-bl"]::before {
+  animation-name: bg-ban-diagonal-tr-bl;
+}
+
+/* Direction: Diagonal Bottom-Left to Top-Right */
+@keyframes bg-ban-diagonal-bl-tr {
+  0% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="diagonal-bl-tr"]::before {
+  animation-name: bg-ban-diagonal-bl-tr;
+}
+
+/* Direction: Diagonal Bottom-Right to Top-Left */
+@keyframes bg-ban-diagonal-br-tl {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.oxy-ani-bg-ban[data-bg-ban-direction="diagonal-br-tl"]::before {
+  animation-name: bg-ban-diagonal-br-tl;
+}
+
+/* =============================================
+   COLOR BACKGROUND EFFECT
+   ============================================= */
+
+.oxy-ani-color-bg {
+  position: relative;
+  animation-name: color-bg-pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: normal;
+  animation-fill-mode: both;
+}
+
+/* Color Background Animation */
+@keyframes color-bg-pulse {
+  0% {
+    background-color: var(--color-bg-from, inherit);
+  }
+  100% {
+    background-color: var(--color-bg-to, inherit);
+  }
+}
+
